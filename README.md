@@ -11,6 +11,14 @@
   - UI/cart state is handled by `Redux Toolkit` (`src/functions/CartSlice.js`), keeping it synchronous and serializable.
   - This reduces boilerplate and improves performance vs storing everything in component state or a single global store.
 
+### Technical highlights — Cart, Caching & Loading 🔧
+
+- **Cart (Redux Toolkit)**: `src/functions/CartSlice.js` implements the cart as an RTK slice with an `item` array and `totalprice`. The `addtocart` reducer adds items or increases quantities and updates totals, keeping state serializable and easy to test.
+
+- **Caching & Mutations (TanStack React Query)**: Product data is fetched with `useQuery` (`queryKey: ['products']` and `['product', id]`) for caching and background updates. The `Addproduct` component uses `useMutation` and calls `queryClient.invalidateQueries({ queryKey: ['products'] })` on success to refresh cached product lists immediately.
+
+- **Loading & Error handling**: Components check `isLoading` (from `useQuery`) and `mutation.isPending` to show a consistent `Loading` component (`src/Component/Loading.jsx`) and `Errormessage` component for errors — this centralizes UX for async operations.
+
 ## How this differs from typical React practice 
 
 - Typical tutorials often place fetch logic directly in components or store all data in one global store. This project:
@@ -25,9 +33,3 @@
 3. Build: `npm run build`
 
 ---
-
-> Notes: Add a `/.env.example` (no secrets), run `npm audit` and consider a secret-scan step in CI (e.g., `npx gitleaks detect`).
-
----
-
-**Want me to run `npm audit` and a repo secret scan now?** Reply with which checks and Ill run them and report back.
