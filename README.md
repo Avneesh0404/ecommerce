@@ -25,9 +25,3 @@
 3. Build: `npm run build`
 
 ---
-
-> Notes: Add a `/.env.example` (no secrets), run `npm audit` and consider a secret-scan step in CI (e.g., `npx gitleaks detect`).
-
----
-
-**Want me to run `npm audit` and a repo secret scan now?** Reply with which checks and Ill run them and report back.
