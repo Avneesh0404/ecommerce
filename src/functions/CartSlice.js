@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-const initialState = {
-  item: [],
-};
 export const CartSlice = createSlice({
   name: "Cart",
-  initialState,
+  initialState:{
+    item: [],
+    totalprice:0,
+  },
   reducers: {
     addtocart: (state, action) => {
       const { productid, title, price } = action.payload;
@@ -13,8 +13,10 @@ export const CartSlice = createSlice({
       );
       if (existingitem) {
         existingitem.qty += 1;
+        state.totalprice += price;
       } else {
         state.item.push({ productid, title, price, qty: 1 });
+        state.totalprice += price;
       }
     },
   },

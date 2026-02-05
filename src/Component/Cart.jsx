@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 
 function Cart() {
   const cartitem = useSelector((state) => state.cart.item);
+  const totalprice = useSelector((state) => state.cart.totalprice);
 
   return (
     <Container className="py-5">
@@ -34,6 +35,11 @@ function Cart() {
           <div className="mt-4">
             <h5>
               Total Items: <Badge bg="success">{cartitem.length}</Badge>
+            </h5>
+          </div>
+          <div className="mt-4">
+            <h5>
+              Total Cart Value: <Badge bg="success">{totalprice}</Badge>
             </h5>
           </div>
         </>
